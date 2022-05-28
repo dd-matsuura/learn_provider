@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'k.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +23,7 @@ class Page1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Page1'),
+        title: Text(K.k),
       ),
       body: Padding(
         padding: const EdgeInsets.all(32),
@@ -43,7 +44,12 @@ class Page2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TextField();
+    return TextField(
+      onChanged: (newText) {
+        K.k = newText;
+        print(K.k);
+      },
+    );
   }
 }
 
@@ -52,6 +58,6 @@ class Page3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text('テキスト');
+    return Text(K.k);
   }
 }
