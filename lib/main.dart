@@ -29,7 +29,10 @@ class Page1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(Provider.of<K>(context).k),
+        // Providerの4.1.0以上の書き方
+        // final model = Provider.of<Model>(context, listen: true) の代わりに、
+        // final model = context.watch<Model>() に変更
+        title: Text(context.watch<K>().k),
       ),
       body: Padding(
         padding: const EdgeInsets.all(32),
@@ -52,8 +55,11 @@ class Page2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       onChanged: (newText) {
-        Provider.of<K>(context, listen: false).textChanged(newText);
-        print(Provider.of<K>(context, listen: false).k);
+        // Providerの4.1.0以上の書き方
+        // final model = Provider.of<Model>(context, listen: false) の代わりに、
+        // final model = context.read<Model>() に変更
+        context.read<K>().textChanged(newText);
+        print(context.read<K>().k);
       },
     );
   }
