@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'k.dart';
 
 void main() {
@@ -10,8 +11,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Page1(),
+    return MaterialApp(
+      home: ChangeNotifierProvider<K>(
+        create: (context) => K(),
+        child: const Page1(),
+      ),
     );
   }
 }
@@ -23,7 +27,7 @@ class Page1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(K.k),
+        title: Text(Provider.of<K>(context).k),
       ),
       body: Padding(
         padding: const EdgeInsets.all(32),
@@ -46,8 +50,8 @@ class Page2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       onChanged: (newText) {
-        K.k = newText;
-        print(K.k);
+        Provider.of<K>(context, listen: false).TextChanged(newText);
+        print(Provider.of<K>(context, listen: false).k);
       },
     );
   }
@@ -58,6 +62,6 @@ class Page3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(K.k);
+    return Text(Provider.of<K>(context).k);
   }
 }
