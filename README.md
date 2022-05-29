@@ -22,4 +22,15 @@ Tools • Dart 2.16.2 • DevTools 2.9.2
 
 ## 使用技術
 
+provider: ^6.0.3
+
+```
+// Providerの4.1.0以上の書き方
+final model = Provider.of<Model>(context, listen: false) // 以前
+final model = context.read<Model>() // 4.1.0以上
+
+final model = Provider.of<Model>(context, listen: true) // 以前
+final model = context.watch<Model>() // 4.1.0以上
+```
+
 ## 機能一覧
