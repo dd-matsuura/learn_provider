@@ -3,7 +3,14 @@ import 'package:provider/provider.dart';
 import 'k.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => K()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -11,12 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ChangeNotifierProvider<K>(
-        create: (context) => K(),
-        child: const Page1(),
-      ),
-    );
+    return const MaterialApp(home: Page1());
   }
 }
 
@@ -50,7 +52,7 @@ class Page2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       onChanged: (newText) {
-        Provider.of<K>(context, listen: false).TextChanged(newText);
+        Provider.of<K>(context, listen: false).textChanged(newText);
         print(Provider.of<K>(context, listen: false).k);
       },
     );
